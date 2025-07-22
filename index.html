@@ -3,116 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحه اصلی</title>
-    <style>
-        body {
-            font-family: 'Vazir', Arial, sans-serif;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            direction: rtl;
-        }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 400px;
-            text-align: right;
-        }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-        }
-        label {
-            color: #34495e;
-            margin-bottom: 5px;
-            display: block;
-        }
-        input, select, button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #bdc3c7;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        button {
-            background-color: #3498db;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
-    </style>
+    <title>کلینیک مشاوره - صفحه اصلی</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
-        <h1>مشخصات کاربر</h1>
-        <form id="userForm" onsubmit="saveUserData(event)">
-            <label for="name">نام:</label>
-            <input type="text" id="name" required>
+        <h1>به کلینیک مشاوره ما خوش آمدید</h1>
+        <p>لطفاً اطلاعات خود را وارد کرده و نوع سوالات را انتخاب کنید تا بهترین تحلیل را برای شما آماده کنیم.</p>
 
-            <label for="age">سن:</label>
-            <input type="number" id="age" min="18" required>
+        <form id="userInfoForm">
+            <div class="form-group">
+                <label for="userName">نام و نام خانوادگی:</label>
+                <input type="text" id="userName" required>
+            </div>
+            <div class="form-group">
+                <label for="userAge">سن:</label>
+                <input type="number" id="userAge" min="18" max="100" required>
+            </div>
+            <div class="form-group">
+                <label for="userGender">جنسیت:</label>
+                <select id="userGender" required>
+                    <option value="">انتخاب کنید...</option>
+                    <option value="male">مرد</option>
+                    <option value="female">زن</option>
+                    <option value="other">دیگر</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="userMaritalStatus">وضعیت تأهل:</label>
+                <select id="userMaritalStatus" required>
+                    <option value="">انتخاب کنید...</option>
+                    <option value="single">مجرد</option>
+                    <option value="married">متأهل</option>
+                    <option value="divorced">مطلقه</option>
+                    <option value="widowed">بیوه</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="userEducation">میزان تحصیلات:</label>
+                <select id="userEducation">
+                    <option value="">انتخاب کنید...</option>
+                    <option value="diploma">دیپلم</option>
+                    <option value="associate">کاردانی</option>
+                    <option value="bachelor">کارشناسی</option>
+                    <option value="master">کارشناسی ارشد</option>
+                    <option value="phd">دکترا و بالاتر</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="userOccupation">شغل:</label>
+                <input type="text" id="userOccupation" placeholder="مثلاً: مهندس، دانشجو، خانه‌دار">
+            </div>
+            <div class="form-group">
+                <label for="userRelationshipStatus">کیفیت رابطه فعلی (در صورت متأهل بودن یا داشتن شریک):</label>
+                <select id="userRelationshipStatus">
+                    <option value="">انتخاب کنید (اختیاری)...</option>
+                    <option value="healthy">سالم و رضایت‌بخش</option>
+                    <option value="challenging">پر چالش</option>
+                    <option value="dissatisfied">بدون رضایت</option>
+                    <option value="stable">پایدار و عادی</option>
+                    <option value="seeking_improvement">در جستجوی بهبود</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="userPurpose">هدف اصلی شما از مراجعه به کلینیک چیست؟</label>
+                <textarea id="userPurpose" rows="3" placeholder="مثلاً: بهبود مهارت‌های ارتباطی، رفع مشکل خاص جنسی، شناخت بهتر خودم"></textarea>
+            </div>
 
-            <label for="gender">جنسیت:</label>
-            <select id="gender" required>
-                <option value="">انتخاب کنید</option>
-                <option value="male">مرد</option>
-                <option value="female">زن</option>
-                <option value="other">سایر</option>
-            </select>
+            <hr style="margin: 30px 0; border-color: var(--border-color);">
 
-            <label for="marital">وضعیت تأهل:</label>
-            <select id="marital" required>
-                <option value="">انتخاب کنید</option>
-                <option value="single">مجرد</option>
-                <option value="married">متأهل</option>
-                <option value="divorced">جدا شده</option>
-            </select>
+            <div class="form-group">
+                <label for="questionCategory">انتخاب نوع سوالات:</label>
+                <select id="questionCategory" required>
+                    <option value="">انتخاب کنید...</option>
+                    <option value="general">سوالات عمومی روابط و خلق و خو</option>
+                    <option value="erotic">سوالات جنسی و اروتیک</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="numQuestions">تعداد سوالات:</label>
+                <select id="numQuestions" required>
+                    <option value="">انتخاب کنید...</option>
+                    <option value="10">10 سوال</option>
+                    <option value="15">15 سوال</option>
+                    <option value="20">20 سوال</option>
+                </select>
+            </div>
 
-            <label for="occupation">شغل:</label>
-            <input type="text" id="occupation">
-
-            <label for="questionType">نوع سوالات:</label>
-            <select id="questionType" required>
-                <option value="">انتخاب کنید</option>
-                <option value="general">سوالات عمومی روابط</option>
-                <option value="erotic">سوالات جنسی و اروتیک</option>
-            </select>
-
-            <label for="questionCount">تعداد سوالات:</label>
-            <select id="questionCount" required>
-                <option value="10">10 سوال</option>
-                <option value="15">15 سوال</option>
-                <option value="20">20 سوال</option>
-            </select>
-
-            <button type="submit">شروع آزمون</button>
+            <button type="button" id="startSurveyButton">شروع ارزیابی</button>
         </form>
     </div>
 
-    <script>
-        function saveUserData(event) {
-            event.preventDefault();
-            const userData = {
-                name: document.getElementById('name').value,
-                age: document.getElementById('age').value,
-                gender: document.getElementById('gender').value,
-                marital: document.getElementById('marital').value,
-                occupation: document.getElementById('occupation').value,
-                questionType: document.getElementById('questionType').value,
-                questionCount: document.getElementById('questionCount').value
-            };
-            localStorage.setItem('userData', JSON.stringify(userData));
-            window.location.href = 'questions.html';
-        }
-    </script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
