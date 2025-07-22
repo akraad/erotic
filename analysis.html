@@ -146,9 +146,7 @@
 
         // Retrieve user data from localStorage
         const userName = localStorage.getItem('userName');
-        const userAge = localStorage.getItem('userAge');
-        const userGender = localStorage.getItem('userGender');
-        const userSexualOrientation = localStorage.getItem('userSexualOrientation');
+        const quizType = localStorage.getItem('quizType'); // Get the quiz type (individual or couples)
 
         let userAnswers = {}; // This will store the answers from questions.html
 
@@ -161,86 +159,77 @@
             window.location.href = 'questions.html';
         }
 
-        // --- منطق تحلیل ---
-        const analysisPatterns = {
+        // --- تحلیل الگوها برای سوالات فردی ---
+        const individualAnalysisPatterns = {
             spirit: [],
             lifestyle: [],
             relationships: [],
             uniqueTraits: []
         };
 
-        // مثال‌هایی برای الگوهای تحلیل (شما باید این‌ها رو با دقت و جزئیات بیشتر تکمیل کنید)
-        // این بخش را باید با منطق تحلیل برای ۱۵۰ سوال خود تکمیل کنید.
-        // من فقط چند نمونه اول را برای نشان دادن نحوه استفاده از userAnswers آورده‌ام.
-
         // روحیه و انرژی
         if (userAnswers[5] === "نقشه‌کشی برای فتح دنیا") { // سوال 6: اولین چیزی که صبح از خواب بیدار میشی به ذهنت میرسه چیه؟ (اندیس 5)
-            analysisPatterns.spirit.push("تو یه آدم پرانرژی و جاه‌طلبی، انگار هر صبح با کلی ایده و برنامه‌های بزرگ بیدار میشی. اصلا اهل درجا زدن نیستی و همیشه دنبال فتح قله‌های جدیدی!");
+            individualAnalysisPatterns.spirit.push("تو یه آدم پرانرژی و جاه‌طلبی، انگار هر صبح با کلی ایده و برنامه‌های بزرگ بیدار میشی. اصلا اهل درجا زدن نیستی و همیشه دنبال فتح قله‌های جدیدی!");
         } else if (userAnswers[5] === "صبحونه چی بخورم؟") {
-            analysisPatterns.spirit.push("انگار روزتو با فکرای کوچیک و لذت‌بخش شروع می‌کنی. یه جورایی هم آروم و هم اهل خوشگذرونی هستی و از لحظه حال لذت می‌بری.");
-        } else if (userAnswers[5] === "ادامه خواب دیشبم") {
-            analysisPatterns.spirit.push("اوه، تو احتمالاً یه روح آروم و شاید کمی کاهل داری که عاشق استراحته! از خواب و راحتیت به این راحتی دل نمی‌کنی.");
+            individualAnalysisPatterns.spirit.push("انگار روزتو با فکرای کوچیک و لذت‌بخش شروع می‌کنی. یه جورایی هم آروم و هم اهل خوشگذرونی هستی و از لحظه حال لذت می‌بری.");
+        }
+        // ... اضافه کردن الگوهای تحلیل برای تمام ۱۵۰ سوال فردی
+
+        // --- تحلیل الگوها برای سوالات زوج‌ها ---
+        const couplesAnalysisPatterns = {
+            spirit: [], // ممکن است در زوج‌ها هم روحیه کلی لحاظ شود
+            lifestyle: [], // ممکن است شامل علایق مشترک باشد
+            relationships: [], // تمرکز اصلی روی پویایی رابطه جنسی و عاطفی
+            uniqueTraits: [] // شامل جنبه‌های جنسی مشترک و خاص
+        };
+
+        // مثال‌ها برای الگوهای تحلیل زوج‌ها
+        if (userAnswers[0] === "پیش‌نوازی طولانی و عاشقانه") { // سوال 1 زوج: بهترین راه برای شروع یک رابطه جنسی لذت‌بخش؟
+            couplesAnalysisPatterns.relationships.push("شما و پارتنرتان اهمیت زیادی به مراحل اولیه رابطه جنسی و ایجاد حس و حال عاطفی می‌دهید. کیفیت و عمق ارتباط برای شما بسیار مهم است.");
+        } else if (userAnswers[0] === "گفتگوی صریح و واضح در مورد خواسته‌ها") {
+            couplesAnalysisPatterns.relationships.push("ارتباط کلامی باز و شفاف، نقطه قوت شما در رابطه جنسی است. به راحتی خواسته‌هایتان را مطرح می‌کنید و این به درک متقابل کمک می‌کند.");
         }
 
-        if (userAnswers[20] === "حرف زدن با دوستام") { // سوال 21: وقتی ناراحتی، چی حالتو بهتر می‌کنه؟ (اندیس 20)
-            analysisPatterns.spirit.push("وقتی ناراحتی، به سمت دوستات و ارتباط با بقیه کشیده میشی. اجتماعی بودن و کمک گرفتن از اطرافیان برای تو خیلی مهمه.");
-        } else if (userAnswers[20] === "خلوت کردن با خودم") {
-            analysisPatterns.spirit.push("وقتی غمگینی، ترجیح میدی تنها باشی و با خودت خلوت کنی. یه روحیه درون‌گرا داری و نیاز به فضای شخصی برای بازیابی انرژی داری.");
-        }
-
-        // سبک زندگی و علایق
-        if (userAnswers[8] === "پیاده‌روی تو طبیعت و کوه‌نوردی") { // سوال 9: کدوم فعالیت آخر هفته بیشتر بهت می‌چسبه؟ (اندیس 8)
-            analysisPatterns.lifestyle.push("عاشق طبیعتی و انرژی‌تو از فضای باز و گشت و گذار می‌گیری. احتمالا یه سبک زندگی فعال و سالم رو ترجیح میدی.");
-        } else if (userAnswers[8] === "پای تلویزیون با فیلم و سریال") {
-            analysisPatterns.lifestyle.push("تو یه آدم آروم و خونه‌دوستی. آخر هفته رو با فیلم و سریال و راحتی می‌گذرونی. شاید اهل هیجان‌های بیرونی نباشی و از دنیای خودت لذت می‌بری.");
-        } else if (userAnswers[8] === "مهمونی با دوستام و رقص و آواز") {
-            analysisPatterns.lifestyle.push("تو یه پروانه‌ی اجتماعی هستی! اهل مهمونی، رقص و ارتباط با دوستات. از هیجان جمع و شلوغی لذت می‌بری.");
-        }
-
-        // روابط و ارتباطات
-        if (userAnswers[16] === "صداقت و وفاداری") { // سوال 17: بهترین ویژگی یک شریک زندگی چیه؟ (اندیس 16)
-            analysisPatterns.relationships.push("تو توی روابط دنبال صداقت و وفاداری هستی. این‌ها برات مهمترین ستون‌های یه رابطه‌اند و به آدم‌های قابل اعتماد جذب میشی.");
-        } else if (userAnswers[16] === "خوش‌اخلاقی و شوخ‌طبعی") {
-            analysisPatterns.relationships.push("فکر می‌کنم تو توی روابطت به انرژی مثبت و خنده خیلی اهمیت میدی. یه شریک زندگی شوخ‌طبع و خوش‌اخلاق می‌تونه روزتو بسازه!");
-        }
-
-        // خصوصیات منحصر به فرد (جنسی و روانی)
-        if (userAnswers[34] === "پیش‌نوازی طولانی و تحریک‌آمیز") { // سوال 35: کدوم فعالیت جنسی برایت لذت‌بخش‌تر است؟ (اندیس 34)
-            analysisPatterns.uniqueTraits.push("به نظر میاد توی روابط جنسی، به ظرافت، جزئیات و ایجاد حس و حال عمیق اهمیت زیادی میدی. پیش‌نوازی برات یه بخش کلیدیه و دوست داری لحظات رو کش بدی.");
-        } else if (userAnswers[34] === "ارتباط فیزیکی پرشور و سریع") {
-            analysisPatterns.uniqueTraits.push("تو اهل شور و هیجانی و دوست داری توی روابط جنسی، به اصل مطلب برسی. سرعت و هیجان برات مهمه و کمتر اهل جزئیات پیش‌نوازی هستی.");
+        if (userAnswers[1] === "رابطه جنسی در فضای باز یا مکان عمومی (با رعایت حریم خصوصی)") { // سوال 2 زوج: کدام فانتزی را دوست دارید با پارتنرتان امتحان کنید؟
+            couplesAnalysisPatterns.uniqueTraits.push("شما و پارتنرتان روحیه ماجراجویی دارید و از امتحان کردن تجربیات جدید و کمی جسورانه لذت می‌برید. شور و هیجان در زندگی جنسی‌تان بسیار پررنگ است.");
+        } else if (userAnswers[1] === "بازی نقش (Role-play)") {
+            couplesAnalysisPatterns.uniqueTraits.push("شما به خلاقیت و تنوع در رابطه جنسی اهمیت می‌دهید و از طریق بازی‌های نقش، هیجان و تازگی را به رابطه‌تان می‌آورید. این نشان‌دهنده روحیه بازیگوش شماست.");
         }
         
-        // --- اینجا باید بقیه تحلیل‌ها را برای 150 سوال اضافه کنید ---
-        // هر `if` شرطی برای یک سوال و یک پاسخ خاص است.
-        // سعی کنید برای هر سوال، بر اساس هر گزینه، جملات تحلیلی مناسب و متنوع اضافه کنید.
-        // مثال:
-        // if (userAnswers[0] === "جورج کلونی (برای گپ زدن درباره فلسفه زندگی)") {
-        //     analysisPatterns.relationships.push("تو حتی توی فانتزی‌هات هم دنبال عمق فکری و بحث‌های جذاب هستی. یه جورایی متفکری!");
-        // }
+        // ... اینجا باید الگوهای تحلیل برای تمام ۱۵۰ سوال زوج‌ها را اضافه کنید.
+        // این بخش نیاز به کار دستی و دقت فراوان دارد.
 
+        // انتخاب مجموعه الگوهای تحلیلی
+        const analysisPatterns = quizType === 'couples' ? couplesAnalysisPatterns : individualAnalysisPatterns;
 
         // --- تولید تحلیل نهایی ---
         function generateAnalysis() {
-            // احوال‌پرسی شخصی با نام کاربر
             personalGreeting.textContent = `سلام ${userName || 'دوست عزیز'}، خیلی خوشحالیم که همراه ما بودی! بریم ببینیم چه خبره:`;
 
-            // نمایش تحلیل‌ها
+            // اگر تحلیل برای زوج‌هاست، ممکن است بخواهید تیترها را هم کمی تغییر دهید
+            if (quizType === 'couples') {
+                document.querySelector('.analysis-section:nth-child(2) h3').textContent = "پویایی رابطه شما";
+                document.querySelector('.analysis-section:nth-child(3) h3').textContent = "سبک زندگی مشترک و علایق";
+                document.querySelector('.analysis-section:nth-child(4) h3').textContent = "ارتباط و صمیمیت شما";
+                document.querySelector('.analysis-section:nth-child(5) h3').textContent = "جنبه‌های خاص و مشترک جنسی شما";
+            }
+
+
             spiritAnalysis.textContent = analysisPatterns.spirit.length > 0 ?
                 analysisPatterns.spirit[Math.floor(Math.random() * analysisPatterns.spirit.length)] :
-                "تو یه روحیه خاص خودتو داری که هنوز نتونستیم کامل کشفش کنیم! ولی مطمئنیم پر از شور زندگی‌ای.";
+                "در مورد این بخش، به نظر میاد شما (یا رابطه‌تون) یه سری ویژگی‌های خاص دارید که باید بیشتر کشف بشن!";
 
             lifestyleAnalysis.textContent = analysisPatterns.lifestyle.length > 0 ?
                 analysisPatterns.lifestyle[Math.floor(Math.random() * analysisPatterns.lifestyle.length)] :
-                "سبک زندگیت پر از نکته‌های جالبه! هر روز یه ماجرای جدید داری و دوست داری تجربه‌های متفاوتی رو امتحان کنی.";
+                "سبک زندگی شما پر از نکته‌های جالبه! هر روز یه ماجرای جدید دارید و دوست دارید تجربه‌های متفاوتی رو امتحان کنید.";
             
             relationshipsAnalysis.textContent = analysisPatterns.relationships.length > 0 ?
                 analysisPatterns.relationships[Math.floor(Math.random() * analysisPatterns.relationships.length)] :
-                "تو توی روابطت یه جور خاص خودت هستی. احتمالا اهل سورپرایز کردن و متفاوت بودن باشی!";
+                "در مورد روابط، به نظر میاد شما (یا رابطه‌تون) یه جور خاص خودتون هستید. احتمالا اهل سورپرایز کردن و متفاوت بودن باشید!";
             
             uniqueTraitsAnalysis.textContent = analysisPatterns.uniqueTraits.length > 0 ?
                 analysisPatterns.uniqueTraits[Math.floor(Math.random() * analysisPatterns.uniqueTraits.length)] :
-                "این بخش از شخصیتت خیلی منحصر به فرده! باید خودت بیشتر بهش فکر کنی که چقدر خاصی.";
+                "این بخش از شخصیت شما (یا رابطه‌تون) خیلی منحصر به فرده! باید خودتون بیشتر بهش فکر کنید که چقدر خاصی.";
         }
 
         // Generate analysis as soon as the page loads, using the name from localStorage
