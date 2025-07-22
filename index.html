@@ -11,98 +11,116 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f0f2f5;
+            background-color: #ECF2F9; /* Light Blue Background */
             margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .container {
-            background-color: #fff;
+            background-color: #FFFFFF; /* White container */
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 12px; /* Slightly more rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Softer shadow */
             text-align: center;
             width: 90%;
-            max-width: 500px;
+            max-width: 550px; /* Slightly larger max width */
+            border: 1px solid #B0B8C4; /* Light Gray Border */
         }
         h1 {
-            color: #d62828;
-            margin-bottom: 20px;
+            color: #4A90E2; /* Primary Blue for headings */
+            margin-bottom: 25px; /* Increased margin */
+            font-size: 2.2em; /* Larger heading */
+        }
+        p {
+            color: #333333; /* Dark Gray for text */
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 25px;
         }
         label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-weight: bold;
-            color: #333;
+            color: #333333;
             text-align: right;
+            font-size: 1em;
         }
         input[type="text"],
         select {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
+            width: calc(100% - 24px); /* Account for padding */
+            padding: 12px;
+            margin-bottom: 25px;
+            border: 1px solid #B0B8C4; /* Light Gray Border */
+            border-radius: 8px; /* Rounded input fields */
+            font-size: 1.1em;
+            color: #333333;
+            background-color: #F8F9FB; /* Very light gray for input background */
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #4A90E2; /* Blue on focus */
+            outline: none;
         }
         button {
-            background-color: #d62828;
+            background-color: #8C6AAD; /* Purple button */
             color: white;
-            padding: 12px 25px;
+            padding: 14px 30px; /* Larger padding */
             border: none;
-            border-radius: 5px;
+            border-radius: 8px; /* Rounded buttons */
             cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s ease;
+            font-size: 1.2em; /* Larger font */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 20px;
+            letter-spacing: 0.5px;
         }
         button:hover {
-            background-color: #c01a1a;
+            background-color: #6C4E8A; /* Darker purple on hover */
+            transform: translateY(-2px); /* Slight lift effect */
         }
-        #error-message {
-            color: red;
-            margin-top: -10px;
-            margin-bottom: 10px;
-            display: none;
+        .link-button {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #4A90E2; /* Blue link */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .link-button:hover {
+            color: #6C4E8A; /* Purple on hover */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>به وبسایت مشاوره جنسی محرمانه خوش آمدید!</h1>
-        <p>لطفاً برای شروع، اطلاعات خود را وارد کنید.</p>
-        <form id="user-info-form">
-            <label for="name">نام شما:</label>
-            <input type="text" id="name" name="name" placeholder="مثال: سارا">
+        <h1>مشاوره جنسی محرمانه</h1>
+        <p>لطفاً اطلاعات زیر را برای شروع وارد کنید:</p>
+        <label for="name">نام:</label>
+        <input type="text" id="name" name="name" placeholder="نام خود را وارد کنید">
 
-            <label for="gender">جنسیت:</label>
-            <select id="gender" name="gender">
-                <option value="">انتخاب کنید</option>
-                <option value="male">آقا</option>
-                <option value="female">خانم</option>
-                <option value="other">ترجیح می‌دهم نگویم</option>
-            </select>
-            <div id="error-message">لطفاً نام و جنسیت خود را وارد کنید.</div>
-            <button type="submit">شروع مشاوره</button>
-        </form>
+        <label for="age">سن:</label>
+        <input type="text" id="age" name="age" placeholder="سن خود را وارد کنید">
+
+        <label for="gender">جنسیت:</label>
+        <select id="gender" name="gender">
+            <option value="">انتخاب کنید</option>
+            <option value="male">مرد</option>
+            <option value="female">زن</option>
+            <option value="other">دیگر</option>
+        </select>
+
+        <label for="sexual_orientation">گرایش جنسی:</label>
+        <select id="sexual_orientation" name="sexual_orientation">
+            <option value="">انتخاب کنید</option>
+            <option value="heterosexual">دگرجنس‌گرا</option>
+            <option value="homosexual">همجنس‌گرا</option>
+            <option value="bisexual">دوجنس‌گرا</option>
+            <option value="asexual">بی‌جنس‌گرا</option>
+            <option value="other">دیگر</option>
+        </select>
+
+        <button onclick="window.location.href='questions.html'">شروع مشاوره</button>
+        <a href="analysis.html" class="link-button">مشاهده تحلیل قبلی</a>
     </div>
-
-    <script>
-        document.getElementById('user-info-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // جلوگیری از ارسال فرم به صورت پیش‌فرض
-
-            const name = document.getElementById('name').value.trim();
-            const gender = document.getElementById('gender').value;
-            const errorMessage = document.getElementById('error-message');
-
-            if (name === '' || gender === '') {
-                errorMessage.style.display = 'block';
-            } else {
-                errorMessage.style.display = 'none';
-                // ذخیره اطلاعات در Local Storage یا Session Storage برای استفاده در صفحات بعدی
-                localStorage.setItem('userName', name);
-                localStorage.setItem('userGender', gender);
-                // هدایت کاربر به صفحه سوالات
-                window.location.href = 'questions.html'; // فرض بر این است که صفحه سوالات questions.html نام دارد
-            }
-        });
-    </script>
 </body>
 </html>
