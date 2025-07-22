@@ -3,121 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سوالات</title>
-    <style>
-        body {
-            font-family: 'Vazir', Arial, sans-serif;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            direction: rtl;
-        }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 500px;
-            text-align: right;
-        }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-        }
-        .question {
-            margin-bottom: 20px;
-        }
-        .question p {
-            color: #34495e;
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-        input[type="radio"] {
-            margin-left: 10px;
-        }
-        button {
-            background-color: #3498db;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            display: block;
-            margin: 20px auto;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
-    </style>
+    <title>کلینیک مشاوره - سوالات</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
-        <h1>سوالات</h1>
-        <form id="questionForm" onsubmit="submitAnswers(event)">
-            <div id="questionsContainer"></div>
-            <button type="submit">ارسال پاسخ‌ها</button>
-        </form>
+        <h2>پاسخ به سوالات</h2>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="question-container">
+            <p class="question-text" id="questionText">در حال بارگذاری سوال...</p>
+            <div class="options-grid" id="optionsGrid">
+                </div>
+            <div class="navigation-buttons">
+                <button id="prevQuestion" disabled>سوال قبلی</button>
+                <button id="nextQuestion">سوال بعدی</button>
+            </div>
+        </div>
     </div>
 
-    <script>
-        const generalQuestions = [
-            { id: 1, text: "چقدر در روابط خود به صداقت اهمیت می‌دهید؟", options: ["خیلی زیاد", "زیاد", "متوسط", "کم", "اصلاً", "بستگی دارد", "همیشه", "اغلب", "گاهی", "به ندرت", "واقعاً مهم نیست", "ترجیح می‌دهم نگویم"] },
-            { id: 2, text: "آیا به راحتی احساسات خود را با شریک زندگی‌تان به اشتراک می‌گذارید؟", options: ["بله همیشه", "اغلب", "گاهی", "به ندرت", "هرگز", "بستگی به موقعیت دارد", "فقط در موارد خاص", "بله اما با احتیاط", "خیر، سخت است", "بستگی به شریکم دارد", "ترجیح می‌دهم تنها باشم", "نمی‌دانم"] },
-            // 8 سوال دیگر اضافه کنید...
-        ];
-
-        const eroticQuestions = [
-            { id: 1, text: "چقدر در روابط جنسی به صمیمیت عاطفی اهمیت می‌دهید؟", options: ["خیلی زیاد", "زیاد", "متوسط", "کم", "اصلاً", "بستگی دارد", "همیشه", "اغلب", "گاهی", "به ندرت", "فقط برای لذت", "نمی‌دانم"] },
-            { id: 2, text: "آیا در مورد فانتزی‌های جنسی خود با شریک زندگی‌تان صحبت می‌کنید؟", options: ["بله همیشه", "اغلب", "گاهی", "به ندرت", "هرگز", "بستگی به شریکم دارد", "فقط در موارد خاص", "بله اما با احتیاط", "خیر، سخت است", "ترجیح می‌دهم نگویم", "بستگی به موقعیت دارد", "نمی‌دانم"] },
-            // 8 سوال دیگر اضافه کنید...
-        ];
-
-        function getRandomItems(array, count) {
-            const shuffled = array.sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, count);
-        }
-
-        function getRandomOptions(options) {
-            return getRandomItems(options, 4);
-        }
-
-        function loadQuestions() {
-            const userData = JSON.parse(localStorage.getItem('userData'));
-            const questionType = userData.questionType;
-            const questionCount = parseInt(userData.questionCount);
-            const questions = questionType === 'general' ? generalQuestions : eroticQuestions;
-            const selectedQuestions = getRandomItems(questions, Math.min(questionCount, questions.length));
-
-            const container = document.getElementById('questionsContainer');
-            selectedQuestions.forEach((q, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'question';
-                questionDiv.innerHTML = `<p>${index + 1}. ${q.text}</p>`;
-                const options = getRandomOptions(q.options);
-                options.forEach(opt => {
-                    questionDiv.innerHTML += `
-                        <label><input type="radio" name="q${q.id}" value="${opt}" required> ${opt}</label><br>
-                    `;
-                });
-                container.appendChild(questionDiv);
-            });
-        }
-
-        function submitAnswers(event) {
-            event.preventDefault();
-            const formData = new FormData(document.getElementById('questionForm'));
-            const answers = {};
-            formData.forEach((value, key) => {
-                answers[key] = value;
-            });
-            localStorage.setItem('answers', JSON.stringify(answers));
-            window.location.href = 'analysis.html';
-        }
-
-        loadQuestions();
-    </script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
