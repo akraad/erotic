@@ -62,6 +62,25 @@
             border-color: #4A90E2; /* Blue on focus */
             outline: none;
         }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; /* Align to right for RTL */
+            margin-bottom: 25px;
+            padding-right: 5px; /* Adjust as needed */
+        }
+        .checkbox-container input[type="checkbox"] {
+            /* Basic styling for checkbox */
+            margin-left: 10px;
+            width: 20px;
+            height: 20px;
+            accent-color: #8C6AAD; /* Purple accent */
+        }
+        .checkbox-container label {
+            margin-bottom: 0;
+            font-weight: normal; /* Override bold for checkbox label */
+        }
+
         button {
             background-color: #8C6AAD; /* Purple button */
             color: white;
@@ -112,12 +131,17 @@
         <label for="sexual_orientation">گرایش جنسی:</label>
         <select id="sexual_orientation" name="sexual_orientation">
             <option value="">انتخاب کنید</option>
-            <option value="heterosexual">دگرجنس‌گرا</option>
+            <option value="heterosexual">دگرجنس‌گرا</            option>
             <option value="homosexual">همجنس‌گرا</option>
             <option value="bisexual">دوجنس‌گرا</option>
             <option value="asexual">بی‌جنس‌گرا</option>
             <option value="other">دیگر</option>
         </select>
+
+        <div class="checkbox-container">
+            <label for="for-couples">این مشاوره برای زوج‌هاست؟</label>
+            <input type="checkbox" id="for-couples">
+        </div>
 
         <button id="start-consultation-btn">شروع مشاوره</button>
         <a href="analysis.html" class="link-button">مشاهده تحلیل قبلی</a>
@@ -129,21 +153,24 @@
         const ageInput = document.getElementById('age');
         const genderSelect = document.getElementById('gender');
         const sexualOrientationSelect = document.getElementById('sexual_orientation');
+        const forCouplesCheckbox = document.getElementById('for-couples'); // Get the new checkbox
 
         startBtn.addEventListener('click', () => {
             const userName = nameInput.value.trim();
             const userAge = ageInput.value.trim();
             const userGender = genderSelect.value;
             const userSexualOrientation = sexualOrientationSelect.value;
+            const isForCouples = forCouplesCheckbox.checked; // Get checkbox status
 
             if (userName && userAge && userGender && userSexualOrientation) {
                 localStorage.setItem('userName', userName);
                 localStorage.setItem('userAge', userAge);
                 localStorage.setItem('userGender', userGender);
                 localStorage.setItem('userSexualOrientation', userSexualOrientation);
+                localStorage.setItem('isForCouples', isForCouples); // Save checkbox status
                 window.location.href = 'questions.html';
             } else {
-                alert('لطفا تمامی فیلدها را پر کنید.');
+                alert('لطفا تمامی فیلدهای الزامی را پر کنید.');
             }
         });
 
@@ -160,6 +187,11 @@
             }
             if (localStorage.getItem('userSexualOrientation')) {
                 sexualOrientationSelect.value = localStorage.getItem('userSexualOrientation');
+            }
+            // Load previous checkbox status
+            const storedIsForCouples = localStorage.getItem('isForCouples');
+            if (storedIsForCouples === 'true') { // localStorage stores booleans as strings
+                forCouplesCheckbox.checked = true;
             }
         });
     </script>
