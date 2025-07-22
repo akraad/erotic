@@ -3,237 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تحلیل شخصیت</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #ECF2F9; /* Light Blue Background */
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .container {
-            background-color: #FFFFFF; /* White container */
-            padding: 30px;
-            border-radius: 12px; /* Slightly more rounded corners */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Softer shadow */
-            text-align: center;
-            width: 90%;
-            max-width: 800px; /* Wider for analysis */
-            border: 1px solid #B0B8C4; /* Light Gray Border */
-        }
-        h1 {
-            color: #4A90E2; /* Primary Blue for headings */
-            margin-bottom: 20px;
-            font-size: 2.5em;
-        }
-        h2 {
-            color: #8C6AAD; /* Purple for subheadings */
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-size: 1.8em;
-        }
-        p {
-            color: #333333; /* Dark Gray for text */
-            font-size: 1.1em;
-            line-height: 1.8;
-            margin-bottom: 15px;
-            text-align: right; /* Align text to right for Persian */
-        }
-        .intro-message {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #555555;
-            margin-bottom: 30px;
-            text-align: right;
-        }
-        .analysis-section {
-            background-color: #F8F9FB; /* Light background for sections */
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            border: 1px solid #E0E6EE;
-            text-align: right;
-        }
-        .analysis-section h3 {
-            color: #6C4E8A; /* Darker purple */
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 1.4em;
-        }
-        .analysis-section ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .analysis-section ul li {
-            margin-bottom: 8px;
-            color: #444444;
-            font-size: 1.05em;
-            padding-right: 20px;
-            position: relative;
-        }
-        .analysis-section ul li::before {
-            content: "•"; /* Bullet point */
-            color: #4A90E2; /* Blue bullet */
-            font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-right: 0.5em;
-            position: absolute;
-            right: 0;
-            top: 0;
-        }
-        .back-button {
-            background-color: #8C6AAD; /* Purple button */
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1em;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            margin-top: 20px;
-            text-decoration: none; /* For anchor tag */
-            display: inline-block;
-        }
-        .back-button:hover {
-            background-color: #6C4E8A; /* Darker purple on hover */
-            transform: translateY(-2px);
-        }
-    </style>
+    <title>تحلیل شخصیت و روابط - کلینیک</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>تحلیل شخصیتت آماده‌ست!</h1>
-        
-        <div id="analysis-content">
-            <p class="intro-message"><span id="personal-greeting"></span></p>
+        <header>
+            <h1>نتایج تحلیل شخصیت و روابط</h1>
+            <p>این تحلیل بر اساس پاسخ‌های شما طراحی شده و می‌تواند بینش‌های ارزشمندی ارائه دهد.</p>
+        </header>
 
-            <div class="analysis-section">
-                <h3>روحیه و انرژی</h3>
-                <p id="spirit-analysis"></p>
+        <main class="analysis-section">
+            <div class="loading-animation" id="loadingAnimation">
+                <div class="spinner"></div>
+                <p>در حال تحلیل پاسخ‌های شما... لطفاً صبر کنید.</p>
             </div>
 
-            <div class="analysis-section">
-                <h3>سبک زندگی و علایق</h3>
-                <p id="lifestyle-analysis"></p>
+            <div class="analysis-result hidden" id="analysisResult">
+                <h2 id="analysisTitle"></h2>
+                <div id="analysisDescription" class="analysis-text">
+                    </div>
+                <div class="contact-info">
+                    <h3>برای مشاوره تخصصی و عمیق‌تر با ما تماس بگیرید:</h3>
+                    <p>آدرس: مشهد، [آدرس دقیق کلینیک شما]</p>
+                    <p>تلفن: [شماره تلفن کلینیک]</p>
+                    <p>ایمیل: [ایمیل کلینیک]</p>
+                    <a href="index.html" class="btn btn-primary mt-4">شروع مجدد تست</a>
+                </div>
             </div>
+        </main>
 
-            <div class="analysis-section">
-                <h3>روابط و ارتباطات</h3>
-                <p id="relationships-analysis"></p>
-            </div>
-
-            <div class="analysis-section">
-                <h3>خصوصیات منحصر به فرد (جنسی و روانی)</h3>
-                <p id="unique-traits-analysis"></p>
-            </div>
-            <a href="questions.html" class="back-button">برگردیم به سوالا؟</a>
-        </div>
+        <footer>
+            <p>&copy; ۲۰۲۵ کلینیک تخصصی روابط و سلامت جنسی. تمامی حقوق محفوظ است.</p>
+        </footer>
     </div>
 
-    <script>
-        const personalGreeting = document.getElementById('personal-greeting');
-        const spiritAnalysis = document.getElementById('spirit-analysis');
-        const lifestyleAnalysis = document.getElementById('lifestyle-analysis');
-        const relationshipsAnalysis = document.getElementById('relationships-analysis');
-        const uniqueTraitsAnalysis = document.getElementById('unique-traits-analysis');
-
-        // Retrieve user data from localStorage
-        const userName = localStorage.getItem('userName');
-        const quizType = localStorage.getItem('quizType'); // Get the quiz type (individual or couples)
-
-        let userAnswers = {}; // This will store the answers from questions.html
-
-        const storedAnswers = localStorage.getItem('userQuizAnswers');
-        if (storedAnswers) {
-            userAnswers = JSON.parse(storedAnswers);
-        } else {
-            // If no answers found, redirect back to questions page or show a message
-            alert("پاسخ‌های شما پیدا نشد! لطفا ابتدا به سوالات پاسخ دهید.");
-            window.location.href = 'questions.html';
-        }
-
-        // --- تحلیل الگوها برای سوالات فردی ---
-        const individualAnalysisPatterns = {
-            spirit: [],
-            lifestyle: [],
-            relationships: [],
-            uniqueTraits: []
-        };
-
-        // روحیه و انرژی
-        if (userAnswers[5] === "نقشه‌کشی برای فتح دنیا") { // سوال 6: اولین چیزی که صبح از خواب بیدار میشی به ذهنت میرسه چیه؟ (اندیس 5)
-            individualAnalysisPatterns.spirit.push("تو یه آدم پرانرژی و جاه‌طلبی، انگار هر صبح با کلی ایده و برنامه‌های بزرگ بیدار میشی. اصلا اهل درجا زدن نیستی و همیشه دنبال فتح قله‌های جدیدی!");
-        } else if (userAnswers[5] === "صبحونه چی بخورم؟") {
-            individualAnalysisPatterns.spirit.push("انگار روزتو با فکرای کوچیک و لذت‌بخش شروع می‌کنی. یه جورایی هم آروم و هم اهل خوشگذرونی هستی و از لحظه حال لذت می‌بری.");
-        }
-        // ... اضافه کردن الگوهای تحلیل برای تمام ۱۵۰ سوال فردی
-
-        // --- تحلیل الگوها برای سوالات زوج‌ها ---
-        const couplesAnalysisPatterns = {
-            spirit: [], // ممکن است در زوج‌ها هم روحیه کلی لحاظ شود
-            lifestyle: [], // ممکن است شامل علایق مشترک باشد
-            relationships: [], // تمرکز اصلی روی پویایی رابطه جنسی و عاطفی
-            uniqueTraits: [] // شامل جنبه‌های جنسی مشترک و خاص
-        };
-
-        // مثال‌ها برای الگوهای تحلیل زوج‌ها
-        if (userAnswers[0] === "پیش‌نوازی طولانی و عاشقانه") { // سوال 1 زوج: بهترین راه برای شروع یک رابطه جنسی لذت‌بخش؟
-            couplesAnalysisPatterns.relationships.push("شما و پارتنرتان اهمیت زیادی به مراحل اولیه رابطه جنسی و ایجاد حس و حال عاطفی می‌دهید. کیفیت و عمق ارتباط برای شما بسیار مهم است.");
-        } else if (userAnswers[0] === "گفتگوی صریح و واضح در مورد خواسته‌ها") {
-            couplesAnalysisPatterns.relationships.push("ارتباط کلامی باز و شفاف، نقطه قوت شما در رابطه جنسی است. به راحتی خواسته‌هایتان را مطرح می‌کنید و این به درک متقابل کمک می‌کند.");
-        }
-
-        if (userAnswers[1] === "رابطه جنسی در فضای باز یا مکان عمومی (با رعایت حریم خصوصی)") { // سوال 2 زوج: کدام فانتزی را دوست دارید با پارتنرتان امتحان کنید؟
-            couplesAnalysisPatterns.uniqueTraits.push("شما و پارتنرتان روحیه ماجراجویی دارید و از امتحان کردن تجربیات جدید و کمی جسورانه لذت می‌برید. شور و هیجان در زندگی جنسی‌تان بسیار پررنگ است.");
-        } else if (userAnswers[1] === "بازی نقش (Role-play)") {
-            couplesAnalysisPatterns.uniqueTraits.push("شما به خلاقیت و تنوع در رابطه جنسی اهمیت می‌دهید و از طریق بازی‌های نقش، هیجان و تازگی را به رابطه‌تان می‌آورید. این نشان‌دهنده روحیه بازیگوش شماست.");
-        }
-        
-        // ... اینجا باید الگوهای تحلیل برای تمام ۱۵۰ سوال زوج‌ها را اضافه کنید.
-        // این بخش نیاز به کار دستی و دقت فراوان دارد.
-
-        // انتخاب مجموعه الگوهای تحلیلی
-        const analysisPatterns = quizType === 'couples' ? couplesAnalysisPatterns : individualAnalysisPatterns;
-
-        // --- تولید تحلیل نهایی ---
-        function generateAnalysis() {
-            personalGreeting.textContent = `سلام ${userName || 'دوست عزیز'}، خیلی خوشحالیم که همراه ما بودی! بریم ببینیم چه خبره:`;
-
-            // اگر تحلیل برای زوج‌هاست، ممکن است بخواهید تیترها را هم کمی تغییر دهید
-            if (quizType === 'couples') {
-                document.querySelector('.analysis-section:nth-child(2) h3').textContent = "پویایی رابطه شما";
-                document.querySelector('.analysis-section:nth-child(3) h3').textContent = "سبک زندگی مشترک و علایق";
-                document.querySelector('.analysis-section:nth-child(4) h3').textContent = "ارتباط و صمیمیت شما";
-                document.querySelector('.analysis-section:nth-child(5) h3').textContent = "جنبه‌های خاص و مشترک جنسی شما";
-            }
-
-
-            spiritAnalysis.textContent = analysisPatterns.spirit.length > 0 ?
-                analysisPatterns.spirit[Math.floor(Math.random() * analysisPatterns.spirit.length)] :
-                "در مورد این بخش، به نظر میاد شما (یا رابطه‌تون) یه سری ویژگی‌های خاص دارید که باید بیشتر کشف بشن!";
-
-            lifestyleAnalysis.textContent = analysisPatterns.lifestyle.length > 0 ?
-                analysisPatterns.lifestyle[Math.floor(Math.random() * analysisPatterns.lifestyle.length)] :
-                "سبک زندگی شما پر از نکته‌های جالبه! هر روز یه ماجرای جدید دارید و دوست دارید تجربه‌های متفاوتی رو امتحان کنید.";
-            
-            relationshipsAnalysis.textContent = analysisPatterns.relationships.length > 0 ?
-                analysisPatterns.relationships[Math.floor(Math.random() * analysisPatterns.relationships.length)] :
-                "در مورد روابط، به نظر میاد شما (یا رابطه‌تون) یه جور خاص خودتون هستید. احتمالا اهل سورپرایز کردن و متفاوت بودن باشید!";
-            
-            uniqueTraitsAnalysis.textContent = analysisPatterns.uniqueTraits.length > 0 ?
-                analysisPatterns.uniqueTraits[Math.floor(Math.random() * analysisPatterns.uniqueTraits.length)] :
-                "این بخش از شخصیت شما (یا رابطه‌تون) خیلی منحصر به فرده! باید خودتون بیشتر بهش فکر کنید که چقدر خاصی.";
-        }
-
-        // Generate analysis as soon as the page loads, using the name from localStorage
-        generateAnalysis();
-    </script>
+    <script src="js/data.js"></script>
+    <script src="js/analysis.js"></script>
 </body>
 </html>
