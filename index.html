@@ -119,8 +119,49 @@
             <option value="other">دیگر</option>
         </select>
 
-        <button onclick="window.location.href='questions.html'">شروع مشاوره</button>
+        <button id="start-consultation-btn">شروع مشاوره</button>
         <a href="analysis.html" class="link-button">مشاهده تحلیل قبلی</a>
     </div>
+
+    <script>
+        const startBtn = document.getElementById('start-consultation-btn');
+        const nameInput = document.getElementById('name');
+        const ageInput = document.getElementById('age');
+        const genderSelect = document.getElementById('gender');
+        const sexualOrientationSelect = document.getElementById('sexual_orientation');
+
+        startBtn.addEventListener('click', () => {
+            const userName = nameInput.value.trim();
+            const userAge = ageInput.value.trim();
+            const userGender = genderSelect.value;
+            const userSexualOrientation = sexualOrientationSelect.value;
+
+            if (userName && userAge && userGender && userSexualOrientation) {
+                localStorage.setItem('userName', userName);
+                localStorage.setItem('userAge', userAge);
+                localStorage.setItem('userGender', userGender);
+                localStorage.setItem('userSexualOrientation', userSexualOrientation);
+                window.location.href = 'questions.html';
+            } else {
+                alert('لطفا تمامی فیلدها را پر کنید.');
+            }
+        });
+
+        // Optional: Load previous user data if available
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('userName')) {
+                nameInput.value = localStorage.getItem('userName');
+            }
+            if (localStorage.getItem('userAge')) {
+                ageInput.value = localStorage.getItem('userAge');
+            }
+            if (localStorage.getItem('userGender')) {
+                genderSelect.value = localStorage.getItem('userGender');
+            }
+            if (localStorage.getItem('userSexualOrientation')) {
+                sexualOrientationSelect.value = localStorage.getItem('userSexualOrientation');
+            }
+        });
+    </script>
 </body>
 </html>
