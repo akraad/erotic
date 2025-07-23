@@ -1,0 +1,155 @@
+/* style.css */
+
+:root {
+    --primary-blue: #3498db;
+    --dark-gray: #333;
+    --medium-gray: #7f8c8d;
+    --light-gray: #f4f4f4;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Vazirmatn', sans-serif; /* یک فونت فارسی مناسب */
+    direction: rtl;
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: var(--white);
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+h1, h2 {
+    color: var(--primary-blue);
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--light-gray);
+    padding-bottom: 10px;
+}
+
+/* --- Form Styles (index.html) --- */
+.form-group {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--medium-gray);
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Important for padding */
+    background-color: #f9f9f9;
+}
+
+.radio-group label {
+    margin-left: 15px;
+    font-weight: normal;
+}
+
+/* --- Button Styles --- */
+.btn {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* --- Question Page Styles --- */
+#question-text {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: var(--dark-gray);
+}
+
+#options-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.option-btn {
+    background-color: var(--white);
+    color: var(--primary-blue);
+    border: 2px solid var(--primary-blue);
+    padding: 15px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.option-btn:hover {
+    background-color: var(--primary-blue);
+    color: var(--white);
+}
+
+#progress-text {
+    margin-top: 20px;
+    color: var(--medium-gray);
+    font-size: 1em;
+}
+
+
+/* --- Analysis Page Styles --- */
+#analysis-container {
+    text-align: right;
+    line-height: 1.8;
+}
+
+#analysis-container h3 {
+    color: var(--primary-blue);
+    border-bottom: 2px solid var(--light-gray);
+    padding-bottom: 5px;
+    margin-top: 30px;
+}
+
+#analysis-container p {
+    margin-bottom: 15px;
+}
+
+.highlight {
+    color: var(--primary-blue);
+    font-weight: bold;
+}
